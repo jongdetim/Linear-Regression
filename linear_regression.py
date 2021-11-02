@@ -25,7 +25,12 @@ def gradient_descent(epochs, l, x, y, m, c, n, draw_plot):
         deriv_m = (-2 / n) * sum(x * (y - y_pred))
         deriv_c = (-2 / n) * sum(y - y_pred)
         m = m - l * deriv_m
+        # c_new = l * stats.mean([predict(x[i], m, c) - value for i, value in enumerate(y)])
         c = c - l * deriv_c
+        # m_new = l * stats.mean([(predict(x[i], m, c) - value) * x[i] for i, value in enumerate(y)])
+        # m, c = m + m_new, c + c_new
+        # y_pred = predict(x, m, c)
+        print(m, c)
         if draw_plot:
             update_plot(y_pred)
             plt.pause(5 / epochs)
@@ -37,8 +42,8 @@ if __name__ == "__main__":
     x = np.array([1, 2, 3, 4, 3, 1, 6, 8, 4, 2])
     y = np.array([6, 12, 18, 54, 32, 1, 23, 2, 6, 3])
     n = float(len(x))
-    m, c = 0, 0
-    l = 0.001
+    m, c = 1, 0
+    l = 0.01
     epochs = 100
     draw_plot = True
 
