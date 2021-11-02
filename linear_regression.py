@@ -13,7 +13,6 @@ def loss(y, x, m, c):
 
 def update_plot(y_pred, i, line):
     line.set_ydata([min(y_pred), max(y_pred)])
-    # line.set_xdata([min(x), max(x)])
     plt.draw()
     plt.pause(0.25 / (i + 1))
 
@@ -24,7 +23,6 @@ def gradient_descent(epochs, l, x, y, m, c, draw_plot, line):
         m_new = l * stats.mean([(predict(x[i], m, c) - value) * x[i] for i, value in enumerate(y)])
         m, c = m - m_new, c - c_new
         y_pred = predict(x, m, c)
-        # print(m, c)
         if draw_plot:
             update_plot(y_pred, i, line)
     return (m, c)
@@ -38,8 +36,6 @@ def gradient_descent_partial_deriv(epochs, l, x, y, m, c, draw_plot, line):
         deriv_c = (-2 / n) * sum(y - y_pred)
         m = m - l * deriv_m
         c = c - l * deriv_c
-        # y_pred = predict(x, m, c)
-        # print(m, c)
         if draw_plot:
             update_plot(y_pred, i, line)
     return (m, c)
